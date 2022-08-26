@@ -1,28 +1,47 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { connect} from "react-redux";
 import { Chart, registerables } from "chart.js";
+import Reloadbutton  from "./reloadbutton";
 Chart.register(...registerables);
-export function Resultpage() {
-	const wpm = useSelector((state) => state.rawwpm);
-	const finaltime = useSelector((state) => state.finaltime);
-	const correct = useSelector((state) => state.correct);
-	const wrong = useSelector((state) => state.wrong);
+function Resultpage(props) {
 	const primarycolor=getComputedStyle(document.body).getPropertyValue(
 		"--primary-color"
 	);
+	function calculate_raw_wpm(){
+		let x=Math.round((props.correct/5)/(props.finaltime/60))
+		if (x<0){
+			return 0
+		}
+		return x
+	}	
+	function calculate_wpm(){
+		let x=Math.round(((props.correct/5)-props.wrong)/(props.finaltime/60))
+		if (x<0){
+			return 0
+		}
+		return x
+	}
 	useEffect(() => {
 		var ctx = document.getElementById("myChart");
 		var labels = [];
-		for (let i = 0; i < wpm.length; i++) {
+		var ghost=Array(props.wpm.length).fill(props.ghostspeed)
+		console.log(ghost);
+		for (let i = 0; i < props.wpm.length; i++) {
 			labels.push(i + 1);
 		}
 		const data = {
 			labels: labels,
 			datasets: [
 				{
-					data: wpm,
+					data: props.wpm,
 					fill: false,
 					borderColor: primarycolor,
+					tension: 0.1,
+				},
+				{
+					data: ghost,
+					fill: false,
+					borderColor: "red",
 					tension: 0.1,
 				},
 			],
@@ -62,12 +81,24 @@ export function Resultpage() {
 				<canvas id="myChart" width="700" height="300"></canvas>
 			</div>
 			<div className="resultdata">
-				<div><span className="heading">wpm</span>
-				<span className="heading">raw wpm</span></div>
-				<h3 className="heading">Accuracy</h3>
-				<h3 className="heading">Time</h3>
-				<h3 className="heading">Accuracy</h3>
+				<div><span className="heading">wpm:<span>{calculate_wpm()}</span></span>
+				<span className="heading">raw wpm:<span>{calculate_raw_wpm()}</span></span></div>
+				<h3 className="heading">Accuracy:<span>{props.accuracy}</span></h3>
+				<h3 className="heading">Time:<span>{props.finaltime}</span></h3>
 			</div>
+			<Reloadbutton result={true}/>
 		</div>
 	);
 }
+const mapStateToProps=(data)=>{
+	return {
+		wpm:data.rawwpm,
+		finaltime:data.finaltime,
+		correct:data.correct,
+		wrong:data.wrong,
+		accuracy:data.accuracy,
+		ghostspeed:data.ghostspeed
+	}
+}
+
+export default connect(mapStateToProps,{})(Resultpage)

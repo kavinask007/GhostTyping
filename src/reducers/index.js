@@ -1,19 +1,26 @@
-import { SETTIME,SETGAMEOVER,SET_FINAL_TIME,SET_CORRECT_LETTERS,SET_WRONG_LETTERS,SET_RAW_WPM} from "../actions";
+import { SET_PUNCTUATIONS,SET_MODE,SET_REFRESH,SET_GHOST_SPEED} from "../actions";
+import {SET_WRONG_LETTERS,SET_RAW_WPM,SET_ACCURACY,SET_IN_PROGRESS} from "../actions"
+import {SETTIME,SETGAMEOVER,SET_FINAL_TIME,SET_CORRECT_LETTERS} from "../actions"
 const INITIAL_STATE={
-    time:60,
+    testtime:60,
     gameover:false,
     finaltime:0,
     wrong:0,
     correct:0,
-    rawwpm:[]
-    
+    rawwpm:[],
+    accuracy:0,
+    punct:false,
+    mode:'paragraph',
+    updated:false,
+    ghostspeed:40,
+    inprogress:false,
 }
 export const reducer =(state=INITIAL_STATE,action)=>{
     switch(action.type){
         case SETTIME:
             return {
                 ...state,
-                time:action.payload,
+                testtime:action.payload,
             }
         case SETGAMEOVER:
             return{
@@ -41,7 +48,36 @@ export const reducer =(state=INITIAL_STATE,action)=>{
                 ...state,
                 rawwpm:action.payload
             }
-       
+       case SET_ACCURACY:
+           return{
+               ...state,
+               accuracy:action.payload
+           }
+        case SET_PUNCTUATIONS:
+            return{
+                ...state,
+                punct:action.payload
+            }
+        case SET_MODE:
+            return{
+                ...state,
+                mode:action.payload
+            }
+        case SET_REFRESH:
+            return{
+                ...state,
+                updated:!state.updated
+            }
+        case SET_GHOST_SPEED:
+            return{
+                ...state,
+                ghostspeed:action.payload
+            }
+        case SET_IN_PROGRESS:
+            return {
+                ...state,
+                inprogress:action.payload
+            }
         default:
             return state
     }

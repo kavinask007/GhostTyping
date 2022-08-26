@@ -18,7 +18,6 @@ export function update_carret_pos(wordnum, letternum, is_offset) {
 		offsetX = -2;
 	}
 	const carret = document.getElementById("carret");
-
 	//set initial carret position
 	if (wordnum == 0 && letternum == 0) {
 		carret.style.left =
@@ -39,10 +38,10 @@ export function update_carret_pos(wordnum, letternum, is_offset) {
 	}
 
 	if(initialY==0){
-		initialY=Math.round(letterarray[letternum].getClientRects()[0].y)
+		initialY=letterarray[letternum].getClientRects()[0].y
 	}
-	if(Math.round(letterarray[letternum].getClientRects()[0].y)>initialY){
-		initialY=Math.round(letterarray[letternum].getClientRects()[0].y)
+	if(letterarray[letternum].getClientRects()[0].y>initialY){
+		initialY=letterarray[letternum].getClientRects()[0].y
 		rowcounter+=1
 		if(rowcounter==2){
 			firstrow=wordnum-1

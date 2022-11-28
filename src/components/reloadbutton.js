@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { setrefresh, setgameover, setinprogress } from "../actions";
 function Reloadbutton(props) {
@@ -18,17 +18,22 @@ function Reloadbutton(props) {
   function setsecondarycolor() {
     setcolor(secondarycolor);
   }
-
+ 
   return (
     <div
+      id="reloadbutton"
       className="reloadbutton"
       onClick={() => {
         if (props.result) {
           dispatch(setgameover(false));
         } else {
-          dispatch(setrefresh());
-          dispatch(setinprogress(false))
-          document.getElementById("time").textContent=0
+          dispatch(setrefresh(true));
+          dispatch(setgameover(true));
+          setTimeout(() => {
+            dispatch(setgameover(false));
+            dispatch(setinprogress(false));
+            dispatch(setrefresh(false));
+          }, 1);
         }
       }}
     >

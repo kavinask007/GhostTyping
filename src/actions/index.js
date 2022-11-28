@@ -36,8 +36,8 @@ export const setpuntuation=(data) => {
 }
 export const setmode=(data) => {
   return{type:SET_MODE,payload:data}}
-export const setrefresh=()=>{
-  return {type:SET_REFRESH}
+export const setrefresh=(data)=>{
+  return {type:SET_REFRESH,payload:data}
 } 
 export const setghostspeed=(data)=>{
   return {type:SET_GHOST_SPEED,payload:data}

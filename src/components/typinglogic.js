@@ -1,6 +1,7 @@
 import { update_carret_pos } from "./caret";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+
 // 1000/((wpm / 60) * 5 )
 import {
   setgameover,
@@ -15,7 +16,6 @@ import update_ghost_pos from "./ghostCaret";
 export function Typinglogic(props) {
   const dispatch = useDispatch();
   const ghostspeed = useSelector((state) => state.ghostspeed);
-  console.log(1000 / ((ghostspeed / 60) * 5));
   const words = document.getElementsByClassName("word");
   const all_letters = [];
   for (let i = 0; i < words.length; i++) {
@@ -24,7 +24,6 @@ export function Typinglogic(props) {
       all_letters.push(letters[j]);
     }
   }
-  console.log(all_letters)
   var gamestart = true;
   var totalkeystrokes = 0;
   var counter = 1;
@@ -78,6 +77,7 @@ export function Typinglogic(props) {
       if (ghost != undefined) {
         ghost.style.visibility = "hidden";
       }
+    
     };
   }, [props, ghostspeed]);
 
@@ -195,8 +195,6 @@ export function Typinglogic(props) {
   var real_time_raw_wpm = [];
   var ghost_letternum = 0;
   function ghosttimer(wpm) {
-    console.log(wpm);
-    console.log(Math.round(1000 / ((wpm / 60) * 5)));
     ghostinterval = setInterval(() => {
       ghost_letternum += 1;
       update_ghost_pos(all_letters, ghost_letternum, false);

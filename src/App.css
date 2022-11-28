@@ -45,7 +45,7 @@
   flex-direction: column;
 }
 .optionsdiv {
-  width: 100%;
+  width: 100%;  
   padding: 5px;
 }
 .options {
@@ -73,7 +73,13 @@
   width: 70%;
   overflow: hidden;
 }
-
+.flex{
+  display: flex;
+  width:100vw;
+  height:100vh;
+  justify-content: center;
+  align-items: center;
+}
 .reloadbutton {
   width: 32px;
   height: 32px;
@@ -150,9 +156,91 @@
   flex-direction: column;
 }
 
-.heading {
-  font-size: 22px;
+.heading span{
+  font-size: 32px;
   margin: 3px;
   font-family: "Poppins", sans-serif;
   color: var(--primary-color);
+}
+.heading{
+  font-size: 32px;
+  margin: 3px;
+  font-family: "Poppins", sans-serif;
+  color:aliceblue
+}
+
+
+.spinner-box {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.configure-border-1 {
+  width: 45px;
+  height: 45px;
+  padding: 3px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fb5b53;
+  animation: configure-clockwise 3s ease-in-out 0s infinite alternate;
+}
+
+.configure-border-2 {
+  width: 45px;
+  height: 45px;
+  padding: 3px;
+  left: -115px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(63,249,220);
+  transform: rotate(45deg);
+  animation: configure-xclockwise 3s ease-in-out 0s infinite alternate;
+}
+
+.configure-core {
+  width: 100%;
+  height: 100%;
+  background-color: #1d2630;
+}
+@keyframes configure-clockwise {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes configure-xclockwise {
+  0% {
+    transform: rotate(45deg);
+  }
+  25% {
+    transform: rotate(-45deg);
+  }
+  50% {
+    transform: rotate(-135deg);
+  }
+  75% {
+    transform: rotate(-225deg);
+  }
+  100% {
+    transform: rotate(-315deg);
+  }
 }

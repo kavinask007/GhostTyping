@@ -19,6 +19,10 @@ function loadFromLocalStorage() {
     if (serialisedState === null) return undefined;
     const tmp=JSON.parse(serialisedState);
     tmp["inprogress"]=false
+    tmp["updated"]=undefined
+    tmp['gameover']=false
+    tmp['finaltime']=0
+    tmp['rawwpm']=[]
     return tmp
   } catch (e) {
     console.warn(e);

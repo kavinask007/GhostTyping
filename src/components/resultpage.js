@@ -81,10 +81,10 @@ function Resultpage(props) {
 				<canvas id="myChart" width="700" height="300"></canvas>
 			</div>
 			<div className="resultdata">
-				<div><span className="heading">wpm:<span>{calculate_wpm()}</span></span>
-				<span className="heading">raw wpm:<span>{calculate_raw_wpm()}</span></span></div>
-				<h3 className="heading">Accuracy:<span>{props.accuracy}</span></h3>
-				<h3 className="heading">Time:<span>{props.finaltime}</span></h3>
+				<span className="heading">wpm : <span>{calculate_wpm()}</span></span>
+				<span className="heading">Raw wpm : <span>{calculate_raw_wpm()}</span></span>
+				<h3 className="heading">Accuracy : <span>{props.accuracy}</span></h3>
+				<h3 className="heading">Time : <span>{props.finaltime}</span></h3>
 			</div>
 			<Reloadbutton result={true}/>
 		</div>

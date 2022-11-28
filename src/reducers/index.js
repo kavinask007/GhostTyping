@@ -66,7 +66,7 @@ export const reducer =(state=INITIAL_STATE,action)=>{
         case SET_REFRESH:
             return{
                 ...state,
-                updated:!state.updated
+                updated:action.payload
             }
         case SET_GHOST_SPEED:
             return{
